@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {App, Sphere, Tetrahedron, Box} from '../src/index';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import { Jumbotron, Button } from 'reactstrap';
-
+import {Grid, Row, Col} from 'react-flexbox-grid';
+import {Footer, Jumbo} from './components/layout';
 import {MeshBasicMaterial} from 'three';
 
 import {SceneModule, CameraModule, RenderingModule} from 'whs/src/modules/app/export';
@@ -36,18 +35,15 @@ export class Application extends Component {
     return (
       <Grid fluid>
         <Row>
-        <Col md={12}>
-          <Jumbotron style={{background: 'transparent'}}>
-            <h1 className="display-3 text-center">Jarrod Medrano</h1>
-            <p className="lead text-center">FRONT-END UI DEVELOPER</p>
-            <Button className="text-center">Contact</Button>
-          </Jumbotron>
+          <Col md={12}>
+            <Jumbo />
           </Col>
         </Row>
         <Row>
           <Col md={12}>
           </Col>
         </Row>
+        <Footer />
         <App modules={[
           new SceneModule(),
           new CameraModule({
@@ -66,7 +62,7 @@ export class Application extends Component {
              }}
         >
           {
-            this.state.spheres.map(function(result, id) {
+            this.state.spheres.map(function (result, id) {
               return (
                 <Sphere
                   geometry={this.state.geometry}
