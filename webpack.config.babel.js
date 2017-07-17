@@ -45,6 +45,10 @@ export default {
                 "transform-object-rest-spread"
             ]
         }
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       }
     ]
   },

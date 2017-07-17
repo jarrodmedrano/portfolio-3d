@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {App, Sphere, Tetrahedron, Box} from '../src/index';
+import 'bootstrap/dist/css/bootstrap.css';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Jumbotron, Button } from 'reactstrap';
 
 import {MeshBasicMaterial} from 'three';
 
@@ -31,42 +34,49 @@ export class Application extends Component {
   render() {
     this.state.spheres.fill(20);
     return (
-      <div>
-        <h1 key="1000">Jarrod Medrano</h1>
+      <Grid fluid>
+        <Row>
+        <Col xs={6} md={12}>
+          <Jumbotron style={{background: 'transparent'}}>
+            <h1 className="display-3 text-center">Jarrod Medrano</h1>
+            <p className="lead text-center">FRONT-END UI DEVELOPER</p>
+          </Jumbotron>
+          </Col>
+        </Row>
         <App modules={[
-        new SceneModule(),
-        new CameraModule({
-          position: {
-            z: this.state.camera.position.z
+          new SceneModule(),
+          new CameraModule({
+            position: {
+              z: this.state.camera.position.z
+            }
+          }),
+          new RenderingModule({
+            bgOpacity: 0,
+            renderer: {alpha: true}
+          }),
+          new OrbitModule()
+        ]}
+             refApp={app => {
+               console.log(app); // app
+             }}
+        >
+          {
+            this.state.spheres.map(function(result, id) {
+              return (
+                <Sphere
+                  geometry={this.state.geometry}
+                  material={new MeshBasicMaterial({color: Math.random() * 0xffffff, opacity: this.state.opacity})}
+                  key={id}
+                  refComponent={component => {
+                    console.log(component); // component
+                  }}
+                  position={[Math.random() * 800 - 400, Math.random() * 800 - 400, Math.random() * 800 - 400]}
+                />
+              )
+            }, this)
           }
-        }),
-        new RenderingModule({
-          bgOpacity: 0,
-          renderer: {alpha: true}
-        }),
-        new OrbitModule()
-      ]}
-      refApp={app => {
-        console.log(app); // app
-      }}
-      >
-        {
-          this.state.spheres.map(function(result, id) {
-            return (
-              <Sphere
-                geometry={this.state.geometry}
-                material={new MeshBasicMaterial({color: Math.random() * 0xffffff, opacity: this.state.opacity})}
-                key={id}
-                refComponent={component => {
-                  console.log(component); // component
-                }}
-                position={[Math.random() * 800 - 400, Math.random() * 800 - 400, Math.random() * 800 - 400]}
-              />
-            )
-          }, this)
-        }
-      </App>
-      </div>
+        </App>
+      </Grid>
     )
   }
 }
