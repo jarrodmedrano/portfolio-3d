@@ -36,11 +36,16 @@ export class Application extends Component {
     return (
       <Grid fluid>
         <Row>
-        <Col xs={6} md={12}>
+        <Col md={12}>
           <Jumbotron style={{background: 'transparent'}}>
             <h1 className="display-3 text-center">Jarrod Medrano</h1>
             <p className="lead text-center">FRONT-END UI DEVELOPER</p>
+            <Button className="text-center">Contact</Button>
           </Jumbotron>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
           </Col>
         </Row>
         <App modules={[
