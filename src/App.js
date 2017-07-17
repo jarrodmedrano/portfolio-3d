@@ -6,7 +6,7 @@ export class App extends TransitionBase {
   static defaultProps = {
     start: true,
     parent: 'div',
-    parentStyle: {flex: 1}
+    parentStyle: {background: '#ffffff', position: 'absolute', top: '0', left: '0', zIndex: '-1'}
   };
 
   constructor(...props) {

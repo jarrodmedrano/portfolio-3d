@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {App, Sphere} from '../src/index';
+import {App, Sphere, Tetrahedron, Box} from '../src/index';
 
 import {MeshBasicMaterial} from 'three';
 
@@ -9,49 +9,64 @@ import {OrbitModule} from 'whs/src/modules/controls/export';
 import {BasicSphere} from './components/BasicSphere';
 
 export class Application extends Component {
+
+  constructor(props) {
+    super(props);
+    const spheres = new Array(100).fill(0);
+
+    this.state = {
+      spheres: spheres,
+      opacity: 0.5,
+      position: Math.random() * 800 - 400,
+      color: Math.random() * 0xffffff,
+      geometry: [3, 35, 35],
+      camera: {
+        position: {
+          z: 20
+        }
+      }
+    }
+  }
+
   render() {
+    this.state.spheres.fill(20);
     return (
-      <App modules={[
+      <div>
+        <h1 key="1000">Jarrod Medrano</h1>
+        <App modules={[
         new SceneModule(),
         new CameraModule({
           position: {
-            z: 20
+            z: this.state.camera.position.z
           }
         }),
-        new RenderingModule(),
+        new RenderingModule({
+          bgOpacity: 0,
+          renderer: {alpha: true}
+        }),
         new OrbitModule()
       ]}
       refApp={app => {
         console.log(app); // app
       }}
       >
-        <Sphere
-          geometry={[3, 32, 32]}
-          material={new MeshBasicMaterial({color: 0xffffff})}
-          key="1"
-          refComponent={component => {
-            console.log(component); // component
-          }}
-        >
-          <Sphere
-            geometry={[3, 32, 32]}
-            material={new MeshBasicMaterial({color: 0xff0000})}
-            position={[3, 0, 0]}
-          />
-        </Sphere>
-        <Sphere
-          geometry={[3, 32, 32]}
-          material={new MeshBasicMaterial({color: 0x00ff00})}
-          position={[-3, 0, 3]}
-          key="2"
-        />
-        <BasicSphere key="3"
-          position={[0, 6, 0]}
-          refComponent={component => {
-            component.material.color.setRGB(1, 1, 0); // Set yellow
-          }}
-        />
+        {
+          this.state.spheres.map(function(result, id) {
+            return (
+              <Sphere
+                geometry={this.state.geometry}
+                material={new MeshBasicMaterial({color: Math.random() * 0xffffff, opacity: this.state.opacity})}
+                key={id}
+                refComponent={component => {
+                  console.log(component); // component
+                }}
+                position={[Math.random() * 800 - 400, Math.random() * 800 - 400, Math.random() * 800 - 400]}
+              />
+            )
+          }, this)
+        }
       </App>
+      </div>
     )
   }
 }
