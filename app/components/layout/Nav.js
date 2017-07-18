@@ -22,7 +22,7 @@ export class Navigator extends Component {
         <Navbar color="faded" light toggleable>
           <NavbarToggler right onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav className="mx-auto" navbar>
               <NavItem>
                 <NavLink tag={Link} to="/">Home</NavLink>
               </NavItem>

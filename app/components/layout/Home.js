@@ -5,13 +5,9 @@ import {Jumbo} from './index';
 export class Home extends Component {
   render() {
     return (
-        <Grid fluid>
-          <Row style={{height: '100vh', alignItems: 'center'}}>
             <Col md={12}>
               <Jumbo />
             </Col>
-          </Row>
-        </Grid>
     )
   }
 }

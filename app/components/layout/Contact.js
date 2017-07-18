@@ -5,16 +5,12 @@ import ContactForm from "../form/ContactForm";
 export class Contact extends Component {
   render() {
     return (
-      <Grid fluid>
-        <Row style={{height: '100vh', alignItems: 'center'}}>
-          <Col md={6}>
-            <h4>Contact Me</h4>
-            <ContactForm/>
+          <Col md={4}>
+            <div className="text-left">
+              <h4>Contact Me</h4>
+              <ContactForm/>
+            </div>
           </Col>
-          <Col md={6}>
-          </Col>
-        </Row>
-      </Grid>
     )
   }
 }
