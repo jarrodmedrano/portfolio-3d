@@ -27,6 +27,42 @@ export class Background extends React.Component {
       }
     }
   }
+
+  componentDidMount() {
+    this.startPolling();
+  }
+
+  componentWillUnmount() {
+    if (this._timer) {
+      clearInterval(this._timer);
+      this._timer = null;
+    }
+  }
+
+  startPolling() {
+    const self = this;
+    setTimeout(function () {
+      self.poll(); // do it once and then start it up ...
+      self._timer = setInterval(self.poll.bind(self), 15000);
+    }, 1000);
+  }
+
+  poll() {
+    console.log('polled');
+    this.setState({
+      camera: {
+        position: {
+          z:  200,
+        },
+        rotation: {
+          y: Math.random() * 800 - 400,
+          x: Math.random() * 800 - 400,
+          z: Math.random() * 800 - 400
+        }
+      }
+    })
+  }
+
   render() {
     return (
       <App modules={[
