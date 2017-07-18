@@ -1,5 +1,6 @@
 import React from 'react';
 import { Jumbotron, Button } from 'reactstrap';
+import { Link } from 'react-router-dom'
 
 export class Jumbo extends React.Component {
   render() {
@@ -8,7 +9,7 @@ export class Jumbo extends React.Component {
         <div className="text-center">
           <h1 className="display-3">Jarrod Medrano</h1>
           <p className="lead">FRONT-END UI DEVELOPER</p>
-          <Button>Contact</Button>
+          <Link to="/contact"><Button>Contact</Button></Link>
         </div>
       </Jumbotron>
     )

@@ -52,7 +52,7 @@ export class Background extends React.Component {
     this.setState({
       camera: {
         position: {
-          z:  200,
+          z:  Math.random() * 800 - 400,
         },
         rotation: {
           y: Math.random() * 800 - 400,
@@ -64,12 +64,14 @@ export class Background extends React.Component {
   }
 
   render() {
+    let cameraZ = this.state.camera.position.z;
+
     return (
       <App modules={[
         new SceneModule(),
         new CameraModule({
           position: {
-            z: this.state.camera.position.z
+            z: cameraZ
           },
           rotation: {
             x: this.state.camera.rotation.x,
@@ -81,11 +83,7 @@ export class Background extends React.Component {
           bgOpacity: 0,
           renderer: {alpha: true}
         }),
-        new OrbitModule({
-          controls: {
-            noPan: true
-          }
-        })
+        new OrbitModule()
       ]}
            // refApp={app => {
            //   console.log(app); // app

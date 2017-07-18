@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import ContactForm from "../form/ContactForm";
 
-
 export class Footer extends Component {
   render() {
     return (
