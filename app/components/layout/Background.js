@@ -18,6 +18,11 @@ export class Background extends React.Component {
       camera: {
         position: {
           z: 20
+        },
+        rotation: {
+          x: 300,
+          y: 300,
+          z: 300
         }
       }
     }
@@ -29,6 +34,11 @@ export class Background extends React.Component {
         new CameraModule({
           position: {
             z: this.state.camera.position.z
+          },
+          rotation: {
+            x: this.state.camera.rotation.x,
+            y: this.state.camera.rotation.y,
+            z: this.state.camera.rotation.z
           }
         }),
         new RenderingModule({
@@ -39,7 +49,6 @@ export class Background extends React.Component {
           controls: {
             noPan: true
           }
-
         })
       ]}
            // refApp={app => {

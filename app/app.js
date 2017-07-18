@@ -9,7 +9,7 @@ export class Application extends Component {
       <div>
         <Background/>
         <Grid fluid>
-          <Row>
+          <Row style={{height: '100vh', alignItems: 'center'}}>
             <Col md={12}>
               <Jumbo />
             </Col>
@@ -18,7 +18,6 @@ export class Application extends Component {
             <Col md={12}>
             </Col>
           </Row>
-          <Footer />
         </Grid>
       </div>
     )
