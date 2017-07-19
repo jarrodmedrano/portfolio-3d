@@ -13,7 +13,7 @@
 .navigation-enter-ltr {
     position: absolute;
     opacity: .5;
-    transform: translate3d(-100%, 0, 0);
+    transform: translate3d(0, -12px, 0);
 }
 
 .navigation-enter-ltr.navigation-enter-active {
@@ -30,14 +30,14 @@
 
 .navigation-leave-ltr.navigation-leave-active {
     opacity: .5;
-    transform: translate3d(100%, 0, 0);
+    transform: translate3d(0, 12px, 0);
     transition: all 600ms cubic-bezier(0.22, 0.82, 0.63, 0.93);
 }
 
 .navigation-enter-rtl {
     position: absolute;
     opacity: .5;
-    transform: translate3d(100%, 0, 0);
+    transform: translate3d(0, 12px, 0);
 }
 
 .navigation-enter-rtl.navigation-enter-active {
@@ -54,7 +54,7 @@
 
 .navigation-leave-rtl.navigation-leave-active {
     opacity: .5;
-    transform: translate3d(-100%, 0, 0);
+    transform: translate3d(0, -12px, 0);
     transition: all 600ms cubic-bezier(0.22, 0.82, 0.63, 0.93);
 }
 
