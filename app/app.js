@@ -7,7 +7,6 @@ export class Application extends Component {
   render() {
     return (
       <div>
-        <Background/>
         <RouteContainer />
       </div>
     )

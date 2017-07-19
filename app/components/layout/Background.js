@@ -9,12 +9,25 @@ export class Background extends React.Component {
     super(props);
     const spheres = new Array(100).fill(0);
 
+
+    const myCamera = new CameraModule({
+      position: {
+        z: Math.random() * 800 - 400
+      },
+      rotation: {
+        x: Math.random() * 800 - 400,
+        y: Math.random() * 800 - 400,
+        z: Math.random() * 800 - 400
+      }
+    });
+
     this.state = {
       spheres: spheres,
       opacity: 0.5,
       position: Math.random() * 800 - 400,
       color: Math.random() * 0xffffff,
       geometry: [3, 35, 35],
+      positionZ: Math.random() * 800 - 400,
       camera: {
         position: {
           z: 20
@@ -24,61 +37,65 @@ export class Background extends React.Component {
           y: 300,
           z: 300
         }
-      }
+      },
+      cameraModule: myCamera
     }
   }
-  //
-  // componentDidMount() {
-  //   this.startPolling();
-  // }
-  //
-  // componentWillUnmount() {
-  //   if (this._timer) {
-  //     clearInterval(this._timer);
-  //     this._timer = null;
-  //   }
-  // }
-  //
-  // startPolling() {
-  //   const self = this;
-  //   setTimeout(function () {
-  //     self.poll(); // do it once and then start it up ...
-  //     self._timer = setInterval(self.poll.bind(self), 15000);
-  //   }, 1000);
-  // }
-  //
-  // poll() {
-  //   console.log('polled');
-  //   this.setState({
-  //     camera: {
-  //       position: {
-  //         z:  Math.random() * 800 - 400,
-  //       },
-  //       rotation: {
-  //         y: Math.random() * 800 - 400,
-  //         x: Math.random() * 800 - 400,
-  //         z: Math.random() * 800 - 400
-  //       }
-  //     }
-  //   })
-  // }
+
+  componentDidMount() {
+    this.startPolling();
+  }
+
+  componentWillUnmount() {
+    if (this._timer) {
+      clearInterval(this._timer);
+      this._timer = null;
+    }
+  }
+
+  startPolling() {
+    const self = this;
+    setTimeout(function () {
+      self.poll(); // do it once and then start it up ...
+      self._timer = setInterval(self.poll.bind(self), 15000);
+    }, 1000);
+  }
+
+  poll() {
+    this.state.cameraModule.camera.position.set(Math.random() * 800 - 400, Math.random() * 800 - 400, Math.random() * 800 - 400)
+
+    // this.setState({
+    //   cameraModule: {
+    //     ...this.state.cameraModule,
+    //     camera: {
+    //       ...this.state.cameraModule.camera,
+    //       rotation: {
+    //         ...this.state.cameraModule.camera.rotation,
+    //         x: Math.random() * 800 - 400
+    //       }
+    //     }
+    //   }
+    // },  console.log(this.state.cameraModule));
+    //
+    // this.setState({
+    //   camera: {
+    //     position: {
+    //       z:  Math.random() * 800 - 400,
+    //     },
+    //     rotation: {
+    //       y: Math.random() * 800 - 400,
+    //       x: Math.random() * 800 - 400,
+    //       z: Math.random() * 800 - 400
+    //     }
+    //   }
+    // })
+  }
 
   render() {
-    let cameraZ = this.state.camera.position.z;
-
     return (
       <App modules={[
         new SceneModule(),
-        new CameraModule({
-          position: {
-            z: cameraZ
-          },
-          rotation: {
-            x: this.state.camera.rotation.x,
-            y: this.state.camera.rotation.y,
-            z: this.state.camera.rotation.z
-          }
-        }),
+        this.state.cameraModule,
         new RenderingModule({
           bgOpacity: 0,
           renderer: {alpha: true}
