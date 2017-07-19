@@ -38,7 +38,8 @@ export default class AnimatedSwitch extends Switch {
 				inputRange: [0, 1],
 				outputRange: ["12px", "0px"]
 			})},0)
-			`
+			`,
+			width: '100%'
 		};
 		return (
 			<Animated.div style={style} className="animated-page-wrapper">

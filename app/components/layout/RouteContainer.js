@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import {Home, Contact, Navigator, Main, Missed} from './index';
-import {CSSTransitionGroup} from 'react-transition-group'
 import AnimatedSwitch from './AnimatedSwitch';
+import * as Animated from "animated/lib/targets/react-dom";
+import TransitionGroup from "react-transition-group/TransitionGroup";
+
 
 const firstChild = props => {
   const childrenArray = React.Children.toArray(props.children);
@@ -84,14 +86,14 @@ export class RouteContainer extends Component {
         <Navigator />
         <Route render={({location}) => (
           <div>
-            <CSSTransitionGroup
+            <TransitionGroup
               component={Main}
               className="transition-container"
               transitionName={this.getAnimation()}
               transitionEnterTimeout={this.getAnimationSpeed()}
               transitionLeaveTimeout={this.getAnimationSpeed()}
             >
-              <Switch
+              <AnimatedSwitch
                 key={location.key}
                 location={location}
               >
@@ -104,8 +106,8 @@ export class RouteContainer extends Component {
                   )}
                 />
                 <Route component={Missed}/>
-              </Switch>
-            </CSSTransitionGroup>
+              </AnimatedSwitch>
+            </TransitionGroup>
           </div>
         )}
         />
