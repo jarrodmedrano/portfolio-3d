@@ -17,11 +17,9 @@ export class RouteContainer extends Component {
 
     this.pages = {
       '/': 0,
-      '/about': 1,
-      '/contact': 2
+      '/contact': 1
     }
   }
-
 
   getDirection() {
     let nextPage = location.pathname;
