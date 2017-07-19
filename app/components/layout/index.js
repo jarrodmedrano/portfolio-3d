@@ -5,3 +5,6 @@ export * from './Home';
 export * from './Main';
 export * from './Contact';
 export * from './Nav';
+export * from './AnimatedWrapper';
+export * from './RouteContainer';
+export * from './Missed';

@@ -23,6 +23,7 @@ export default {
     loaders: [
       {
         test: /\.js$/,
+        exclude: /node_modules\/(?!(whs)\/).*/,
         loader: 'babel-loader',
         query: {
             presets: ['es2015', 'react', 'stage-1'],
