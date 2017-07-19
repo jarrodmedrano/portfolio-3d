@@ -3,6 +3,8 @@ import {App, Sphere} from '../../../src/index';
 import {MeshBasicMaterial} from 'three';
 import {SceneModule, CameraModule, RenderingModule} from 'whs/src/modules/app/export';
 import {OrbitModule} from 'whs/src/modules/controls/export';
+import * as Animated from "animated/lib/targets/react-dom";
+import TWEEN from 'tween';
 
 export class Background extends React.Component {
   constructor(props) {
@@ -28,16 +30,6 @@ export class Background extends React.Component {
       color: Math.random() * 0xffffff,
       geometry: [3, 35, 35],
       positionZ: Math.random() * 800 - 400,
-      camera: {
-        position: {
-          z: 20
-        },
-        rotation: {
-          x: 300,
-          y: 300,
-          z: 300
-        }
-      },
       cameraModule: myCamera
     }
   }
@@ -61,8 +53,53 @@ export class Background extends React.Component {
     }, 1000);
   }
 
+  componentDidMount() {
+
+    let camera = this.state.cameraModule.camera,
+      position = camera.position,
+      xPos = position.x,
+      yPos = position.y,
+      zPos = position.z;
+
+    var from = {
+      x: xPos,
+      y: yPos,
+      z: zPos
+    };
+
+    var to = {
+      x: xPos,
+      y: yPos,
+      z: zPos
+    };
+
+    var tween = new TWEEN.Tween(from)
+      .to(to, 600)
+      .easing(TWEEN.Easing.Linear.None)
+      .onUpdate(function () {
+        camera.position.set(this.x, this.y, this.z);
+        // camera.lookAt(new THREE.Vector3(0, 0, 0));
+        console.log('updated');
+      })
+      .onComplete(function () {
+        console.log('completed');
+        // camera.lookAt(new THREE.Vector3(0, 0, 0));
+      })
+      .start();
+  }
+
+  animate() {
+    TWEEN.update();
+    requestAnimationFrame(animate);
+    // renderer.render(scene, camera);
+    // controls.update();
+  }
+
   poll() {
-    this.state.cameraModule.camera.position.set(Math.random() * 800 - 400, Math.random() * 800 - 400, Math.random() * 800 - 400)
+
+    animate();
+    //
+    // position.setZ(zPos+=100);
 
     // this.setState({
     //   cameraModule: {
