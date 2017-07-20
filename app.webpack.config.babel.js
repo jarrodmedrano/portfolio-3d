@@ -23,6 +23,7 @@ export default {
     loaders: [
       {
         test: /\.js$/,
+        exclude: /node_modules\/(?!(whs)\/).*/,
         loader: 'babel-loader',
         query: {
             presets: ['es2015', 'react', 'stage-1'],
@@ -33,7 +34,12 @@ export default {
                 "transform-object-rest-spread"
             ]
         }
-      }
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      {test: /\.(jpe?g|png|gif|svg)$/i, loader: "file-loader"}
     ]
   },
   plugins: isProduction
@@ -46,6 +52,6 @@ export default {
   : [],
   devServer: {
     contentBase: './app/',
-    publicPath: '/build/'
+    publicPath: './build/'
   }
 }
