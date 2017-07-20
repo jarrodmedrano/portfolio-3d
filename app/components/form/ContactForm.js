@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { SubmissionError, reduxForm, Field } from 'redux-form'
 import { createPost } from '../../actions/index';
-import {createStore, combineReducers} from 'redux';
 
 const renderField = ({input, label, type, name, meta: {touched, error}}) => (
   <div>
@@ -14,15 +13,26 @@ const renderField = ({input, label, type, name, meta: {touched, error}}) => (
 )
 
 class ContactForm extends React.Component {
-  //define an object on the postsnew class
-  static contextTypes = {
-    router: React.PropTypes.object
-  };
+
+  checkStatus(response) {
+    if (response.status >= 200 && response.status < 300) {
+      return response
+    } else {
+      var error = new Error(response.statusText)
+      error.response = response
+      throw error
+    }
+  }
+
+  parseJSON(response) {
+    return response.json()
+  }
 
   onSubmit(props) {
-    const ROOT_URL = 'https://formspree.io/jmedran@gmail.com';
+    const {createRecord, reset} = this.props;
 
-    axios.post(`${ROOT_URL}`, props)
+    const ROOT_URL = '//formspree.io/jmedran@gmail.com';
+    fetch(`${ROOT_URL}`, props)
       .catch(error => {
         // how you pass server-side validation errors back is up to you
         if(error.validationErrors) {
@@ -31,11 +41,10 @@ class ContactForm extends React.Component {
           // what you do about other communication errors is up to you
         }
       })
-      .then(() => {
+      .then((response) => {
       // blog post has been created navigate to index
       //we navigate by calling this.context.router.push with the new path to navigate to.
-
-      this.context.router.push('/');
+        reset();
     })
   }
 
@@ -47,20 +56,23 @@ class ContactForm extends React.Component {
       <Form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
         <FormGroup>
           <Field
-            name="email"
+            name="Email"
             type="email"
             component={renderField}
-            label="email"
+            label="Email"
           />
         </FormGroup>
         <FormGroup>
           <Field
-            name="message"
+            name="Message"
             type="textarea"
             component={renderField}
-            label="message"
+            label="Message"
           />
         </FormGroup>
+        <Field type="text" name="_gotcha" component={renderField} />
+        <Field type="hidden" name="_subject" value="Subject" component={renderField} />
+        <Field type="hidden" name="_cc" value="email@cc.com" component={renderField} />
         <Button disabled={submitting}>Submit</Button>
       </Form>
     );
@@ -69,11 +81,11 @@ class ContactForm extends React.Component {
 
 function validate(values) {
   const errors = {};
-  if(!values.email) {
-    errors.email = 'Please enter an email';
+  if(!values.Email) {
+    errors.Email = 'Please enter an Email';
   }
-  if(!values.message) {
-    errors.message = 'Please enter a message';
+  if(!values.Message) {
+    errors.Message = 'Please enter a Message';
   }
 
   return errors;
@@ -83,6 +95,6 @@ function validate(values) {
 //reduxForm 1st is form config, 2nd is mapstatetoprops, 3rd is mapdispatchtoprops
 export default reduxForm({
   form: 'ContactForm',
-  fields: ['email', 'message'],
+  fields: ['Email', 'Message'],
   validate
 }, null, { createPost } )(ContactForm);

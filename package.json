@@ -60,6 +60,7 @@
     "redux-promise": "^0.5.3",
     "tween": "^0.9.0",
     "url-loader": "^0.5.9",
+    "whatwg-fetch": "^2.0.3",
     "whs": "2.0.0-beta.6"
   },
   "directories": {
