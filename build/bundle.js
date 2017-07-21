@@ -60817,8 +60817,6 @@ var ContactForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.props);
-
       var _props = this.props,
           handleSubmit = _props.handleSubmit,
           submitting = _props.submitting;
@@ -72933,6 +72931,7 @@ var RouteContainer = exports.RouteContainer = function (_Component) {
                     location: location
                   },
                   _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _index.Home }),
+                  _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/index.html', component: _index.Home }),
                   _react2.default.createElement(_reactRouterDom.Route, {
                     exact: true,
                     path: '/contact',
