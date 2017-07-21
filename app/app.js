@@ -4,6 +4,14 @@ import './assets/main.css';
 import {RouteContainer, Background} from './components/layout';
 
 export class Application extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+
+    }
+  }
+
   render() {
     return (
       <div>

@@ -51,7 +51,8 @@ export default {
   ]
   : [],
   devServer: {
-    contentBase: './app/',
-    publicPath: './build/'
+    historyApiFallback: true,
+    contentBase: './app',
+    publicPath: '/build/'
   }
 }
