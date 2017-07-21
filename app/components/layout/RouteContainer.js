@@ -20,6 +20,7 @@ export class RouteContainer extends Component {
                 location={location}
               >
                 <Route exact path="/" component={Home}/>
+                <Route exact path="./" component={Home}/>
                 <Route
                   exact
                   path="/contact"
