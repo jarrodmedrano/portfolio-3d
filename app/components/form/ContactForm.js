@@ -25,9 +25,9 @@ const renderField = ({input, label, type, name, style, meta: {touched, error}}) 
 class ContactForm extends React.Component {
   onSubmit(props) {
     const {reset} = this.props;
-
-    const ROOT_URL = '//formspree.io/jmedran@gmail.com';
-    fetch(`${ROOT_URL}`, props)
+    firebase.database().ref('messages').push({
+      props
+      })
       .catch(error => {
         if(error.validationErrors) {
           throw new SubmissionError(error.validationErrors)
