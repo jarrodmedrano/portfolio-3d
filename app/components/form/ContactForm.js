@@ -30,8 +30,6 @@ class ContactForm extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-
     const {handleSubmit, submitting} = this.props
 
     const gotcha = {
