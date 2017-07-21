@@ -1,9 +1,7 @@
 import React from 'react';
-import axios from 'axios';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { SubmissionError, reduxForm, Field } from 'redux-form'
 import { createPost } from '../../actions/index';
-import { BrowserRouter as Router } from 'react-router-dom'
 
 const renderField = ({input, label, type, name, style, meta: {touched, error}}) => (
   <div style={style} >
@@ -14,36 +12,18 @@ const renderField = ({input, label, type, name, style, meta: {touched, error}}) 
 )
 
 class ContactForm extends React.Component {
-  checkStatus(response) {
-    if (response.status >= 200 && response.status < 300) {
-      return response
-    } else {
-      var error = new Error(response.statusText)
-      error.response = response
-      throw error
-    }
-  }
-
-  parseJSON(response) {
-    return response.json()
-  }
-
   onSubmit(props) {
-    const {createRecord, reset} = this.props;
+    const {reset} = this.props;
 
     const ROOT_URL = '//formspree.io/jmedran@gmail.com';
     fetch(`${ROOT_URL}`, props)
       .catch(error => {
-        // how you pass server-side validation errors back is up to you
         if(error.validationErrors) {
           throw new SubmissionError(error.validationErrors)
         } else {
-          // what you do about other communication errors is up to you
         }
       })
-      .then((response) => {
-      // blog post has been created navigate to index
-      //we navigate by calling this.context.router.push with the new path to navigate to.
+      .then(() => {
         reset();
         this.props.history.push('/success');
       })
@@ -52,7 +32,7 @@ class ContactForm extends React.Component {
   render() {
     console.log(this.props);
 
-    const {error, handleSubmit, pristine, reset, submitting} = this.props
+    const {handleSubmit, submitting} = this.props
 
     const gotcha = {
       display: 'none'
@@ -96,9 +76,7 @@ function validate(values) {
 
   return errors;
 }
-// connect: first argument is mapStateToProps, 2nd is mapDispatchToProps
 
-//reduxForm 1st is form config, 2nd is mapstatetoprops, 3rd is mapdispatchtoprops
 export default reduxForm({
   form: 'ContactForm',
   fields: ['Email', 'Message'],
