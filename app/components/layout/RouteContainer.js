@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
-import {Home, Contact, Navigator, Main, Missed} from './index';
+import {Home, Contact, Navigator, Main, Missed, Success} from './index';
 import AnimatedSwitch from './AnimatedSwitch';
 import TransitionGroup from "react-transition-group/TransitionGroup";
 
@@ -9,7 +9,7 @@ export class RouteContainer extends Component {
     return (
       <div>
         <Navigator />
-        <Route render={({location}) => (
+        <Route render={({location, history}) => (
           <div>
             <TransitionGroup
               component={Main}
@@ -25,6 +25,13 @@ export class RouteContainer extends Component {
                   path="/contact"
                   render={props => (
                     <Contact {...props} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/success"
+                  render={props => (
+                    <Success {...props} />
                   )}
                 />
                 <Route component={Missed}/>

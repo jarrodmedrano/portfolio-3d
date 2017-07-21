@@ -4,6 +4,7 @@ export * from './Background';
 export * from './Home';
 export * from './Main';
 export * from './Contact';
+export * from './Success';
 export * from './Nav';
 export * from './AnimatedWrapper';
 export * from './RouteContainer';

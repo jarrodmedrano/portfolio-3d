@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import {Col} from 'react-flexbox-grid';
-import ContactForm from "../form/ContactForm";
 
-export class Contact extends Component {
+export class Success extends Component {
   render() {
     return (
           <Col md={12}>
             <div className="text-left">
-              <h4>Contact Me</h4>
-              <ContactForm history={this.props.history} />
+              <h4>Success!</h4>
+              <p>Thank you for contacting me</p>
             </div>
           </Col>
     )

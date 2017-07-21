@@ -6,6 +6,10 @@
     margin: 0 5px;
 }
 
+.gotcha {
+    display: none;
+}
+
 #container {
     position: absolute;
     top: 0;

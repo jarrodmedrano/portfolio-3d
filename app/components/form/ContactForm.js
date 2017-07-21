@@ -3,9 +3,10 @@ import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { SubmissionError, reduxForm, Field } from 'redux-form'
 import { createPost } from '../../actions/index';
+import { BrowserRouter as Router } from 'react-router-dom'
 
-const renderField = ({input, label, type, name, meta: {touched, error}}) => (
-  <div>
+const renderField = ({input, label, type, name, style, meta: {touched, error}}) => (
+  <div style={style} >
     <Label for={name}>{label}</Label>
     <Input {...input} placeholder={label} type={type} name={name} className="form-group" />
     {touched && error && <span className="text-danger">{error}</span>}
@@ -13,7 +14,6 @@ const renderField = ({input, label, type, name, meta: {touched, error}}) => (
 )
 
 class ContactForm extends React.Component {
-
   checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
       return response
@@ -45,12 +45,18 @@ class ContactForm extends React.Component {
       // blog post has been created navigate to index
       //we navigate by calling this.context.router.push with the new path to navigate to.
         reset();
-    })
+        this.props.history.push('/success');
+      })
   }
 
   render() {
+    console.log(this.props);
 
     const {error, handleSubmit, pristine, reset, submitting} = this.props
+
+    const gotcha = {
+      display: 'none'
+    }
 
     return (
       <Form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
@@ -70,9 +76,9 @@ class ContactForm extends React.Component {
             label="Message"
           />
         </FormGroup>
-        <Field type="text" name="_gotcha" component={renderField} />
-        <Field type="hidden" name="_subject" value="Subject" component={renderField} />
-        <Field type="hidden" name="_cc" value="email@cc.com" component={renderField} />
+        <Field style={gotcha} type="text" name="_gotcha" component={renderField} />
+        <Field style={gotcha} type="hidden" name="_subject" value="Subject" component={renderField} />
+        <Field style={gotcha} type="hidden" name="_cc" value="email@cc.com" component={renderField} />
         <Button disabled={submitting}>Submit</Button>
       </Form>
     );
