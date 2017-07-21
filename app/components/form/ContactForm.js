@@ -2,6 +2,17 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { SubmissionError, reduxForm, Field } from 'redux-form'
 import { createPost } from '../../actions/index';
+import * as firebase from 'firebase';
+
+const config = {
+  apiKey: "AIzaSyDqzla75CXN9UNGtKbYJ44oHQHHE_O80vw",
+  authDomain: "slashclick.firebaseapp.com",
+  databaseURL: "https://slashclick.firebaseio.com",
+  projectId: "slashclick",
+  storageBucket: "slashclick.appspot.com",
+  messagingSenderId: "87044009797"
+};
+firebase.initializeApp(config);
 
 const renderField = ({input, label, type, name, style, meta: {touched, error}}) => (
   <div style={style} >
