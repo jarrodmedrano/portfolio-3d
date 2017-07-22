@@ -6,10 +6,10 @@ export class Jumbo extends React.Component {
   render() {
     return (
       <Jumbotron style={{background: 'transparent'}}>
-        <div className="text-center">
-          <h1 className="display-3">Jarrod Medrano</h1>
+        <div className="text-left">
+          <h1 className="display-3">JARROD MEDRANO</h1>
           <p className="lead">FRONT-END UI DEVELOPER</p>
-          <Link to="/contact"><Button>Contact</Button></Link>
+          <Link to="/contact"><Button color="primary">Contact</Button></Link>
         </div>
       </Jumbotron>
     )

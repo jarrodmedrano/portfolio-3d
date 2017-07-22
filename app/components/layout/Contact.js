@@ -6,9 +6,11 @@ export class Contact extends Component {
   render() {
     return (
           <Col md={12}>
-            <div className="text-left">
-              <h4>Contact Me</h4>
+            <div className="card text-left">
+              <div className="card-block">
+              <h4 className="card-title">Contact Me</h4>
               <ContactForm history={this.props.history} />
+              </div>
             </div>
           </Col>
     )

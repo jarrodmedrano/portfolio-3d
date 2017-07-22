@@ -68,7 +68,7 @@ class ContactForm extends React.Component {
         <Field style={gotcha} type="text" name="_gotcha" component={renderField} />
         <Field style={gotcha} type="hidden" name="_subject" value="Subject" component={renderField} />
         <Field style={gotcha} type="hidden" name="_cc" value="email@cc.com" component={renderField} />
-        <Button disabled={submitting}>Submit</Button>
+        <Button disabled={submitting} color="primary">Submit</Button>
       </Form>
     );
   }

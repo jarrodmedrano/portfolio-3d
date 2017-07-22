@@ -24,7 +24,7 @@ export class Color extends Component {
       colorIndices: [0, 1, 2, 3],
 //transition speed
       gradientSpeed: 0.002,
-      gradient: "-webkit-gradient(linear, left top, right top, from(rgb(62, 35, 255)), to(rgb(60, 255, 60))"
+      gradient: `-webkit-gradient(linear, left top, right top, from(rgb(${colors[0[0]]}, ${colors[0[1]]}, ${colors[0[2]]}, to(rgb(${colors[1[0]]}, ${colors[1[1]]}, ${colors[1[2]]}))`
     }
 
     this.updateGradient = this.updateGradient.bind(this);
