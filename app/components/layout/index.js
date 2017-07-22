@@ -9,3 +9,4 @@ export * from './Nav';
 export * from './AnimatedWrapper';
 export * from './RouteContainer';
 export * from './Missed';
+export * from './Color';

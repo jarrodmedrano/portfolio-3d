@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
-import {Home, Contact, Navigator, Main, Missed, Success} from './index';
+import {Color, Home, Contact, Navigator, Main, Missed, Success} from './index';
 import AnimatedSwitch from './AnimatedSwitch';
 import TransitionGroup from "react-transition-group/TransitionGroup";
 
 export class RouteContainer extends Component {
   render() {
     return (
-      <div>
+      <Color>
         <Navigator />
         <Route render={({location, history}) => (
           <div>
@@ -41,7 +41,7 @@ export class RouteContainer extends Component {
           </div>
         )}
         />
-      </div>
+      </Color>
     )
   }
 };

@@ -62503,9 +62503,7 @@ var ContactForm = function (_React$Component) {
 
       var reset = this.props.reset;
 
-
-      var ROOT_URL = '//formspree.io/jmedran@gmail.com';
-      firebase.database().ref('slashclick').push({
+      firebase.database().ref('messages').push({
         props: props
       }).catch(function (error) {
         if (error.validationErrors) {
