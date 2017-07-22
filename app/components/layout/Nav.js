@@ -20,7 +20,7 @@ export class Navigator extends Component {
     return (
       <div>
         <Navbar color="faded" light toggleable>
-          <NavbarToggler right onClick={this.toggle} />
+          <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mx-left" navbar>
               <NavItem>

@@ -9,7 +9,7 @@ export class Jumbo extends React.Component {
         <div className="text-left">
           <h1 className="display-3">JARROD MEDRANO</h1>
           <p className="lead">FRONT-END UI DEVELOPER</p>
-          <Link to="/contact"><Button color="primary">Contact</Button></Link>
+          <Link to="/contact"><Button>Contact</Button></Link>
         </div>
       </Jumbotron>
     )

@@ -7,8 +7,9 @@ import TransitionGroup from "react-transition-group/TransitionGroup";
 export class RouteContainer extends Component {
   render() {
     return (
-      <Color>
+      <div>
         <Navigator />
+        <Color>
         <Route render={({location, history}) => (
           <div>
             <TransitionGroup
@@ -42,6 +43,7 @@ export class RouteContainer extends Component {
         )}
         />
       </Color>
+      </div>
     )
   }
 };
