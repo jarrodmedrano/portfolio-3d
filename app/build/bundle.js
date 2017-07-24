@@ -76356,7 +76356,7 @@ var Navigator = exports.Navigator = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Navigator.__proto__ || Object.getPrototypeOf(Navigator)).call(this, props));
 
-    _this.myLink = function (to, text, id, props) {
+    _this.myLink = function (to, text, id, target, props) {
       var current = _this.props.location.pathname === to;
 
       return _react2.default.createElement(
@@ -76364,7 +76364,7 @@ var Navigator = exports.Navigator = function (_Component) {
         { key: id },
         _react2.default.createElement(
           _reactstrap.NavLink,
-          _extends({ tag: _reactRouterDom.Link }, current ? { disabled: true } : {}, { to: to }),
+          _extends({ tag: _reactRouterDom.Link, target: target }, current ? { disabled: true } : {}, { to: to }),
           text
         )
       );
@@ -76397,10 +76397,12 @@ var Navigator = exports.Navigator = function (_Component) {
         title: 'Contact'
       }, {
         route: 'https://github.com/jarrodmedrano',
-        title: 'Github'
+        title: 'Github',
+        target: '_blank'
       }, {
         route: 'https://www.linkedin.com/in/jarrod-medrano-b89b0037/',
-        title: 'LinkedIn'
+        title: 'LinkedIn',
+        target: '_blank'
       }];
 
       return _react2.default.createElement(
@@ -76417,7 +76419,7 @@ var Navigator = exports.Navigator = function (_Component) {
               _reactstrap.Nav,
               { className: 'mx-auto', navbar: true },
               links.map(function (result, id) {
-                return _this2.myLink.apply(_this2, [result.route, result.title, id].concat(_toConsumableArray(_this2.props)));
+                return _this2.myLink.apply(_this2, [result.route, result.title, id, result.target].concat(_toConsumableArray(_this2.props)));
               }, this)
             )
           )
