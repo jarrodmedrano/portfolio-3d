@@ -62515,6 +62515,11 @@ var ContactForm = function (_React$Component) {
 
       var reset = this.props.reset;
 
+
+      if (!props) {
+        return this.validate();
+      }
+
       firebase.database().ref('messages').push({
         props: props
       }).catch(function (error) {
@@ -62525,6 +62530,13 @@ var ContactForm = function (_React$Component) {
         reset();
         _this2.props.history.push('/success');
       });
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      var reset = this.props.reset;
+
+      reset();
     }
   }, {
     key: 'render',
@@ -62566,7 +62578,7 @@ var ContactForm = function (_React$Component) {
         _react2.default.createElement(_reduxForm.Field, { style: gotcha, type: 'hidden', name: '_cc', value: 'email@cc.com', component: renderField }),
         _react2.default.createElement(
           _reactstrap.Button,
-          { disabled: submitting, color: 'primary' },
+          { disabled: submitting },
           'Submit'
         )
       );
@@ -76180,7 +76192,7 @@ var Jumbo = exports.Jumbo = function (_React$Component) {
             { to: '/contact' },
             _react2.default.createElement(
               _reactstrap.Button,
-              { color: 'primary' },
+              null,
               'Contact'
             )
           )
@@ -76312,6 +76324,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Navigator = undefined;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -76323,6 +76337,8 @@ var _reactstrap = __webpack_require__(154);
 var _reactRouterDom = __webpack_require__(41);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -76337,6 +76353,20 @@ var Navigator = exports.Navigator = function (_Component) {
     _classCallCheck(this, Navigator);
 
     var _this = _possibleConstructorReturn(this, (Navigator.__proto__ || Object.getPrototypeOf(Navigator)).call(this, props));
+
+    _this.myLink = function (to, text, id, props) {
+      var current = _this.props.location.pathname === to;
+
+      return _react2.default.createElement(
+        _reactstrap.NavItem,
+        { key: id },
+        _react2.default.createElement(
+          _reactstrap.NavLink,
+          _extends({ tag: _reactRouterDom.Link }, current ? { disabled: true } : {}, { to: to }),
+          text
+        )
+      );
+    };
 
     _this.toggle = _this.toggle.bind(_this);
     _this.state = {
@@ -76355,55 +76385,38 @@ var Navigator = exports.Navigator = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      var links = [{
+        route: '/',
+        title: 'Home'
+      }, {
+        route: '/contact',
+        title: 'Contact'
+      }, {
+        route: 'https://github.com/jarrodmedrano',
+        title: 'Github'
+      }, {
+        route: 'https://www.linkedin.com/in/jarrod-medrano-b89b0037/',
+        title: 'LinkedIn'
+      }];
+
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
           _reactstrap.Navbar,
           { color: 'faded', light: true, toggleable: true },
-          _react2.default.createElement(_reactstrap.NavbarToggler, { right: true, onClick: this.toggle }),
+          _react2.default.createElement(_reactstrap.NavbarToggler, { onClick: this.toggle }),
           _react2.default.createElement(
             _reactstrap.Collapse,
             { isOpen: this.state.isOpen, navbar: true },
             _react2.default.createElement(
               _reactstrap.Nav,
               { className: 'mx-left', navbar: true },
-              _react2.default.createElement(
-                _reactstrap.NavItem,
-                null,
-                _react2.default.createElement(
-                  _reactstrap.NavLink,
-                  { tag: _reactRouterDom.Link, to: '/' },
-                  'Home'
-                )
-              ),
-              _react2.default.createElement(
-                _reactstrap.NavItem,
-                null,
-                _react2.default.createElement(
-                  _reactstrap.NavLink,
-                  { tag: _reactRouterDom.Link, to: '/contact' },
-                  'Contact'
-                )
-              ),
-              _react2.default.createElement(
-                _reactstrap.NavItem,
-                null,
-                _react2.default.createElement(
-                  _reactstrap.NavLink,
-                  { tag: _reactRouterDom.Link, to: 'https://github.com/jarrodmedrano', target: '_blank' },
-                  'Github'
-                )
-              ),
-              _react2.default.createElement(
-                _reactstrap.NavItem,
-                null,
-                _react2.default.createElement(
-                  _reactstrap.NavLink,
-                  { tag: _reactRouterDom.Link, to: 'https://www.linkedin.com/in/jarrod-medrano-b89b0037/', target: '_blank' },
-                  'LinkedIn'
-                )
-              )
+              links.map(function (result, id) {
+                return _this2.myLink.apply(_this2, [result.route, result.title, id].concat(_toConsumableArray(_this2.props)));
+              }, this)
             )
           )
         )
@@ -76465,49 +76478,53 @@ var RouteContainer = exports.RouteContainer = function (_Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        _index.Color,
+        'div',
         null,
-        _react2.default.createElement(_index.Navigator, null),
-        _react2.default.createElement(_reactRouterDom.Route, { render: function render(_ref) {
-            var location = _ref.location,
-                history = _ref.history;
-            return _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                _TransitionGroup2.default,
-                {
-                  component: _index.Main,
-                  className: 'transition-container'
-                },
+        _react2.default.createElement(_index.Navigator, { location: location, history: history }),
+        _react2.default.createElement(
+          _index.Color,
+          null,
+          _react2.default.createElement(_reactRouterDom.Route, { render: function render(_ref) {
+              var location = _ref.location,
+                  history = _ref.history;
+              return _react2.default.createElement(
+                'div',
+                null,
                 _react2.default.createElement(
-                  _AnimatedSwitch2.default,
+                  _TransitionGroup2.default,
                   {
-                    key: location.key,
-                    location: location
+                    component: _index.Main,
+                    className: 'transition-container'
                   },
-                  _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _index.Home }),
-                  _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: './', component: _index.Home }),
-                  _react2.default.createElement(_reactRouterDom.Route, {
-                    exact: true,
-                    path: '/contact',
-                    render: function render(props) {
-                      return _react2.default.createElement(_index.Contact, props);
-                    }
-                  }),
-                  _react2.default.createElement(_reactRouterDom.Route, {
-                    exact: true,
-                    path: '/success',
-                    render: function render(props) {
-                      return _react2.default.createElement(_index.Success, props);
-                    }
-                  }),
-                  _react2.default.createElement(_reactRouterDom.Route, { component: _index.Missed })
+                  _react2.default.createElement(
+                    _AnimatedSwitch2.default,
+                    {
+                      key: location.key,
+                      location: location
+                    },
+                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _index.Home }),
+                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: './', component: _index.Home }),
+                    _react2.default.createElement(_reactRouterDom.Route, {
+                      exact: true,
+                      path: '/contact',
+                      render: function render(props) {
+                        return _react2.default.createElement(_index.Contact, props);
+                      }
+                    }),
+                    _react2.default.createElement(_reactRouterDom.Route, {
+                      exact: true,
+                      path: '/success',
+                      render: function render(props) {
+                        return _react2.default.createElement(_index.Success, props);
+                      }
+                    }),
+                    _react2.default.createElement(_reactRouterDom.Route, { component: _index.Missed })
+                  )
                 )
-              )
-            );
-          }
-        })
+              );
+            }
+          })
+        )
       );
     }
   }]);

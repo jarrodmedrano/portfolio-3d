@@ -51,10 +51,10 @@ export class Navigator extends Component {
 
     return (
       <div>
-        <Navbar color="faded" light toggleable>
+        <Navbar className="navbar-inverse bg-inverse" dark toggleable>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="mx-left" navbar>
+            <Nav className="mx-auto" navbar>
               {links.map((result, id) => {
                 return (
                   this.myLink(result.route, result.title, id, ...this.props)
