@@ -75987,7 +75987,7 @@ var Contact = exports.Contact = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         _reactFlexboxGrid.Col,
-        { md: 12 },
+        { md: 6 },
         _react2.default.createElement(
           'div',
           { className: 'card text-left' },

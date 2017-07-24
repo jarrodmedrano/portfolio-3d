@@ -19,11 +19,11 @@ export class Navigator extends Component {
     });
   }
 
-  myLink = (to, text, id, props) => {
+  myLink = (to, text, id, target, props) => {
     const current = this.props.location.pathname === to;
 
     return (
-      <NavItem key={id}><NavLink tag={Link} { ...( current ? { disabled: true } : {} ) } to={to}>{text}</NavLink></NavItem>
+      <NavItem key={id}><NavLink tag={Link} target={target} { ...( current ? { disabled: true } : {} ) } to={to}>{text}</NavLink></NavItem>
     )
   };
 
@@ -41,11 +41,13 @@ export class Navigator extends Component {
       },
       {
         route: 'https://github.com/jarrodmedrano',
-        title: 'Github'
+        title: 'Github',
+        target: '_blank'
       },
       {
         route: 'https://www.linkedin.com/in/jarrod-medrano-b89b0037/',
-        title: 'LinkedIn'
+        title: 'LinkedIn',
+        target: '_blank'
       }
     ];
 
@@ -57,7 +59,7 @@ export class Navigator extends Component {
             <Nav className="mx-auto" navbar>
               {links.map((result, id) => {
                 return (
-                  this.myLink(result.route, result.title, id, ...this.props)
+                  this.myLink(result.route, result.title, id, result.target, ...this.props)
                 )
               }, this)}
             </Nav>
