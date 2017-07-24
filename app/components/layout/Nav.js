@@ -53,7 +53,7 @@ export class Navigator extends Component {
 
     return (
       <div>
-        <Navbar className="navbar-inverse bg-inverse" dark toggleable>
+        <Navbar className="navbar-inverse bg-inverse" toggleable>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mx-auto" navbar>

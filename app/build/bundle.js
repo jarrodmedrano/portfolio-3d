@@ -76410,7 +76410,7 @@ var Navigator = exports.Navigator = function (_Component) {
         null,
         _react2.default.createElement(
           _reactstrap.Navbar,
-          { className: 'navbar-inverse bg-inverse', dark: true, toggleable: true },
+          { className: 'navbar-inverse bg-inverse', toggleable: true },
           _react2.default.createElement(_reactstrap.NavbarToggler, { onClick: this.toggle }),
           _react2.default.createElement(
             _reactstrap.Collapse,
