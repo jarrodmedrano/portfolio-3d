@@ -5,9 +5,7 @@ export class Main extends Component {
   render() {
     return (
       <Grid fluid className="wrapper">
-        <Row style={{height: '100vh'}}  middle="xs" center="xs">
           {this.props.children}
-        </Row>
       </Grid>
     )
   }

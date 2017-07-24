@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch } from "react-router-dom";
+import {Grid, Row} from 'react-flexbox-grid';
 import * as Animated from "animated/lib/targets/react-dom";
 
 export default class AnimatedSwitch extends Switch {
@@ -40,7 +41,9 @@ export default class AnimatedSwitch extends Switch {
 		};
 		return (
 			<Animated.div style={style} className="animated-page-wrapper">
+				<Row style={{height: '100vh'}}  middle="xs" center="xs">
 				{super.render()}
+				</Row>
 			</Animated.div>
 		);
 	}
