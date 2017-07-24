@@ -25,6 +25,11 @@ const renderField = ({input, label, type, name, style, meta: {touched, error}}) 
 class ContactForm extends React.Component {
   onSubmit(props) {
     const {reset} = this.props;
+
+    if(!props) {
+      return this.validate();
+    }
+
     firebase.database().ref('messages').push({
       props
       })
@@ -38,6 +43,11 @@ class ContactForm extends React.Component {
         reset();
         this.props.history.push('/success');
       })
+  }
+
+  componentWillUnmount() {
+    const {reset} = this.props;
+    reset();
   }
 
   render() {

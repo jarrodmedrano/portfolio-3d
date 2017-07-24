@@ -4,11 +4,13 @@ import {Color, Home, Contact, Navigator, Main, Missed, Success} from './index';
 import AnimatedSwitch from './AnimatedSwitch';
 import TransitionGroup from "react-transition-group/TransitionGroup";
 
+
+
 export class RouteContainer extends Component {
   render() {
     return (
       <div>
-        <Navigator />
+        <Navigator location={location} history={history} />
         <Color>
         <Route render={({location, history}) => (
           <div>
